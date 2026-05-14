@@ -57,6 +57,12 @@ html {
   color: #1e293b;
 }
 
+/* Contract output */
+.contract-output {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
 /* Focus styles */
 input:focus, select:focus, textarea:focus {
   outline: none;
@@ -75,4 +81,48 @@ input:focus, select:focus, textarea:focus {
 ::-webkit-scrollbar-thumb {
   background: #94a3b8;
   border-radius: 3px;
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  /* Hide everything except the contract */
+  body * {
+    visibility: hidden;
+  }
+
+  .print-contract,
+  .print-contract * {
+    visibility: visible;
+  }
+
+  .print-contract {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    max-height: none;
+    overflow: visible;
+    border: none;
+    padding: 2cm 2.5cm;
+    background: white;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 11pt;
+    line-height: 1.8;
+    color: #000;
+  }
+
+  /* Page breaks before major sections */
+  .print-contract .page-break-before {
+    page-break-before: always;
+  }
+
+  /* Avoid breaking inside clauses */
+  .print-contract p {
+    page-break-inside: avoid;
+  }
+
+  /* Clause headings should not be orphaned */
+  .print-contract .font-bold {
+    page-break-after: avoid;
+  }
 }
